@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+/*
+  Colour system (60/30/10)
+  60  paper / linen  : white and a faint warm grey for section rhythm
+  30  gown           : the deep charcoal of a barrister's gown
+  10  ember          : burnt orange, used for action and emphasis only
+  ember-ink is the text-safe burnt orange (5.4:1 on white).
+  ember-glow is the burnt orange for use on the dark gown colour (6.7:1).
+*/
+@theme inline {
+  --color-paper: #ffffff;
+  --color-linen: #f4f2ef;
+  --color-bib: #e9e4de;
+  --color-gown: #221e1c;
+  --color-gown-soft: #4a423e;
+  --color-ember: #cc5500;
+  --color-ember-ink: #b34a00;
+  --color-ember-deep: #8f3b00;
+  --color-ember-glow: #f08a4b;
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, "Times New Roman", serif;
+
+  --radius-control: 6px;
+  --radius-panel: 14px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-paper font-sans text-gown antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-ember-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+@utility section {
+  @apply py-16 sm:py-24;
+}
+@utility h2 {
+  @apply font-sans text-3xl font-semibold leading-tight tracking-tight sm:text-4xl;
+}
+@utility lead {
+  @apply mt-4 max-w-2xl font-serif text-lg leading-relaxed;
+}
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-control px-6 font-sans text-base font-medium transition-colors;
+}
+@utility btn-primary {
+  @apply btn bg-ember-ink text-paper hover:bg-ember-deep disabled:cursor-not-allowed disabled:bg-gown-soft/50;
+}
+@utility btn-secondary {
+  @apply btn border-2 border-gown text-gown hover:bg-gown hover:text-paper;
+}
+@utility btn-on-dark {
+  @apply btn border-2 border-bib text-paper hover:bg-paper hover:text-gown;
+}
+@utility field-label {
+  @apply block font-sans text-sm font-medium text-gown;
+}
+@utility field {
+  @apply mt-1.5 block w-full rounded-control border border-gown-soft/40 bg-paper px-4 py-3 font-sans text-base text-gown placeholder:text-gown-soft/70 focus:border-ember-ink focus:outline-none focus:ring-2 focus:ring-ember-ink/30;
+}
