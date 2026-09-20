@@ -32,7 +32,7 @@ export function Enrol() {
         </div>
         <div className="lg:col-span-7">
           <EnrolForm
-            programmes={programmes.map(({ slug, title, feeNaira }) => ({ slug, title, feeNaira }))}
+            programmes={programmes.map(({ slug, title, feeUSD }) => ({ slug, title, feeUSD }))}
           />
         </div>
       </div>

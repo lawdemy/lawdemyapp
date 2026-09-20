@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { formatNaira, programmes, site, whatsappLink } from "@/lib/site";
+import { formatUSD, programmes, site, whatsappLink } from "@/lib/site";
 import { Logo } from "@/components/Logo";
 
 export const metadata: Metadata = { title: "Enrolment", robots: { index: false } };
@@ -43,7 +43,7 @@ export default async function ConfirmedPage({
             <>
               <h1 className="h2 text-gown">You&apos;re enrolled</h1>
               <p className="lead text-gown-soft">
-                Payment of {formatNaira(result.amount)} received
+                Payment of {formatUSD(result.amount)} received
                 {result.programme ? ` for ${result.programme}` : ""}. We&apos;ll email {result.email} with your next
                 steps.
               </p>

@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/SiteHeader";
+import { getUser } from "@/lib/dal";
 import { Hero } from "@/components/Hero";
 import { ProofStrip } from "@/components/ProofStrip";
 import { Audience } from "@/components/Audience";
@@ -12,10 +13,12 @@ import { Contact } from "@/components/Contact";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const user = await getUser();
+
   return (
     <>
-      <SiteHeader />
+      <SiteHeader loggedIn={Boolean(user)} />
       <main id="main">
         <Hero />
         <ProofStrip />

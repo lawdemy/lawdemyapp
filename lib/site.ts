@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Single source of truth for Lawdemy's business details.
  * Every value marked TODO must be replaced with real information before launch.
  * Nothing here should be invented: no fake reviews, ratings or certifications.
@@ -13,17 +13,14 @@ export const site = {
   city: "Lagos",
   country: "Nigeria",
 
-  // TODO: replace with the real numbers. Use international format without spaces.
-  phone: "+2340000000000",
-  phoneDisplay: "+234 000 000 0000",
-  whatsapp: "2340000000000", // digits only, no "+"
-  email: "admissions@your-domain.ng", // TODO
+  phone: "+2348037723164",
+  phoneDisplay: "+234 803 772 3164",
+  whatsapp: "2348037723164", // digits only, no "+"
+  email: "lawdemydevs@gmail.com",
 
-  // TODO: full street address. It powers the map and search listings.
-  address: "Lagos, Nigeria",
+  address: "Workstation, Maryland Mall, Lagos",
 
-  // TODO: your Cal.com / Calendly booking link for free consultations.
-  bookingUrl: "https://cal.com/your-handle/free-consultation",
+  bookingUrl: "https://calendly.com/lawdemydevs/30min",
 } as const;
 
 export const whatsappLink = (
@@ -36,8 +33,8 @@ export type Programme = {
   forWho: string;
   summary: string;
   topics: string[];
-  /** Fee in Naira. Leave null until confirmed; online payment stays off for that programme. */
-  feeNaira: number | null;
+  /** Fee in US dollars. Leave null until confirmed; online payment stays off for that programme. */
+  feeUSD: number | null;
 };
 
 // TODO: draft programmes based on the brief. Edit titles, topics and fees to match what you teach.
@@ -54,7 +51,7 @@ export const programmes: Programme[] = [
       "Rules of Professional Conduct 2023 in daily practice",
       "Legal research that holds up in court",
     ],
-    feeNaira: null,
+    feeUSD: 250,
   },
   {
     slug: "litigation-practice",
@@ -68,7 +65,7 @@ export const programmes: Programme[] = [
       "Examination-in-chief and cross-examination",
       "Arbitration and mediation under the 2023 Act",
     ],
-    feeNaira: null,
+    feeUSD: 250,
   },
   {
     slug: "corporate-commercial",
@@ -82,7 +79,7 @@ export const programmes: Programme[] = [
       "Due diligence for transactions",
       "What the Nigeria Tax Act 2025 changes for clients",
     ],
-    feeNaira: null,
+    feeUSD: 250,
   },
   {
     slug: "data-protection",
@@ -96,7 +93,7 @@ export const programmes: Programme[] = [
       "Data protection impact assessments",
       "Responding to breaches and data subject requests",
     ],
-    feeNaira: null,
+    feeUSD: 250,
   },
 ];
 
@@ -132,9 +129,10 @@ export const faqs = [
   },
 ];
 
-export const formatNaira = (n: number) =>
-  new Intl.NumberFormat("en-NG", {
+export const formatUSD = (n: number) =>
+  new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "NGN",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(n);
+

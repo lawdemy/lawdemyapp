@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatNaira } from "@/lib/site";
+import { formatUSD } from "@/lib/site";
 import { SELECT_PROGRAMME_EVENT } from "./ChooseProgrammeButton";
 
-type Option = { slug: string; title: string; feeNaira: number | null };
+type Option = { slug: string; title: string; feeUSD: number | null };
 type Status = { kind: "idle" } | { kind: "sending" } | { kind: "error"; message: string };
 
 export function EnrolForm({ programmes }: { programmes: Option[] }) {
@@ -18,7 +18,7 @@ export function EnrolForm({ programmes }: { programmes: Option[] }) {
   }, []);
 
   const selected = programmes.find((p) => p.slug === slug);
-  const canPay = Boolean(selected?.feeNaira);
+  const canPay = Boolean(selected?.feeUSD);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -94,9 +94,9 @@ export function EnrolForm({ programmes }: { programmes: Option[] }) {
 
       <div className="mt-6 flex flex-col gap-4 border-t border-bib pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-sans text-base text-gown" aria-live="polite">
-          {canPay && selected?.feeNaira ? (
+          {canPay && selected?.feeUSD ? (
             <>
-              Total: <strong className="font-semibold">{formatNaira(selected.feeNaira)}</strong>
+              Total: <strong className="font-semibold">{formatUSD(selected.feeUSD)}</strong>
             </>
           ) : (
             "The fee for this programme is shared on request. Book a free call or WhatsApp us."

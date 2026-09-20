@@ -1,4 +1,4 @@
-import { formatNaira, programmes } from "@/lib/site";
+import { formatUSD, programmes } from "@/lib/site";
 import { ChooseProgrammeButton } from "./ChooseProgrammeButton";
 import { CheckIcon } from "./Icons";
 
@@ -30,7 +30,7 @@ export function Programmes() {
               </ul>
               <div className="mt-auto flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
                 <p className="font-sans text-base font-semibold">
-                  {p.feeNaira ? formatNaira(p.feeNaira) : "Fee on request"}
+                  {p.feeUSD ? formatUSD(p.feeUSD) : "Fee on request"}
                 </p>
                 <ChooseProgrammeButton slug={p.slug} title={p.title} />
               </div>

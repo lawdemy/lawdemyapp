@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { site } from "@/lib/site";
 import { Logo } from "./Logo";
+import { LogoutButton } from "./LogoutButton";
 import { CloseIcon, MenuIcon, PhoneIcon } from "./Icons";
 
 const nav = [
@@ -12,7 +13,7 @@ const nav = [
   { href: "#contact", label: "Contact" },
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ loggedIn }: { loggedIn: boolean }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -49,9 +50,26 @@ export function SiteHeader() {
             <PhoneIcon />
             <span className="sr-only sm:not-sr-only sm:text-sm sm:font-medium">Call us</span>
           </a>
-          <a href="#enrol" className="btn-primary hidden min-h-11 px-5 text-sm sm:inline-flex">
-            Join the Academy
-          </a>
+          {loggedIn ? (
+            <>
+              <a href="/courses" className="btn-primary hidden min-h-11 px-5 text-sm sm:inline-flex">
+                My courses
+              </a>
+              <LogoutButton className="hidden font-sans text-sm font-medium text-gown-soft hover:text-gown sm:inline-flex sm:items-center sm:px-2" />
+            </>
+          ) : (
+            <>
+              <a
+                href="/login"
+                className="hidden font-sans text-sm font-medium text-gown-soft hover:text-gown sm:inline-flex sm:items-center sm:px-2"
+              >
+                Student login
+              </a>
+              <a href="#enrol" className="btn-primary hidden min-h-11 px-5 text-sm sm:inline-flex">
+                Join the Academy
+              </a>
+            </>
+          )}
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center rounded-control text-gown hover:bg-linen lg:hidden"
@@ -79,11 +97,39 @@ export function SiteHeader() {
                 </a>
               </li>
             ))}
-            <li className="pb-3 pt-2">
-              <a href="#enrol" onClick={() => setOpen(false)} className="btn-primary w-full">
-                Join the Academy
-              </a>
-            </li>
+            {loggedIn ? (
+              <>
+                <li>
+                  <a
+                    href="/courses"
+                    onClick={() => setOpen(false)}
+                    className="block py-3 font-sans text-lg font-medium text-gown"
+                  >
+                    My courses
+                  </a>
+                </li>
+                <li className="pb-3 pt-2">
+                  <LogoutButton className="btn-secondary w-full" />
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <a
+                    href="/login"
+                    onClick={() => setOpen(false)}
+                    className="block py-3 font-sans text-lg font-medium text-gown"
+                  >
+                    Student login
+                  </a>
+                </li>
+                <li className="pb-3 pt-2">
+                  <a href="#enrol" onClick={() => setOpen(false)} className="btn-primary w-full">
+                    Join the Academy
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       )}

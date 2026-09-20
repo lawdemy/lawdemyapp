@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   if (!isEmail(email)) return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
   if (phone.replace(/\D/g, "").length < 10)
     return NextResponse.json({ error: "Enter a valid phone number." }, { status: 400 });
-  if (!programme.feeNaira)
+  if (!programme.feeUSD)
     return NextResponse.json({ error: "Online payment isn't open for this programme yet." }, { status: 400 });
 
   const secret = process.env.PAYSTACK_SECRET_KEY;
@@ -37,8 +37,8 @@ export async function POST(req: Request) {
     headers: { Authorization: `Bearer ${secret}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       email,
-      amount: Math.round(programme.feeNaira * 100), // kobo
-      currency: "NGN",
+      amount: Math.round(programme.feeUSD * 100), // cents
+      currency: "USD",
       callback_url: `${site.url}/enrol/confirmed`,
       metadata: {
         name,
